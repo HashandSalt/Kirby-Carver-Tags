@@ -1,23 +1,21 @@
 <?php
-	function kb_images($tag)
-	{
-		// Get the attributes
-		$att = json_decode(json_encode($tag['attributes']), true);
+    function kb_images($tag)
+    {
+        // Get the attributes
+        $att = json_decode(json_encode($tag['attributes']), true);
 
-    $class = isset($att['class']) ? $att['class'] : '';
-    $wraptag 	= isset($att['wraptag']) ? $att['wraptag'] : 'div';
-    $exclude = isset($att['exclude']) ? $att['exclude'] : '';
+        $class = isset($att['class']) ? $att['class'] : '';
+        $wraptag = isset($att['wraptag']) ? $att['wraptag'] : 'div';
+        $exclude = isset($att['exclude']) ? $att['exclude'] : '';
 
-    $images = page()->images();
+        $images = page()->images();
 
-    if ($exclude) {
-      $images = $images->filterBy('filename', '!*=', $att['exclude']);
+        if ($exclude) {
+            $images = $images->filterBy('filename', '!*=', $att['exclude']);
+        }
+
+        foreach ($images as $image) {
+            $img = '<img src="' . $image->url().'"'. 'alt="'. $image->alt().'">';
+            echo Html::tag($wraptag, [$img], ["class" => $class]). PHP_EOL;
+        }
     }
-
-    foreach ($images as $image) {
-      $img = '<img src="' . $image->url().'"'. 'alt="'. $image->alt().'">';
-      echo Html::tag($wraptag, [$img], ["class" => $class]). PHP_EOL;
-    }
-
-
-}
