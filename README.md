@@ -1,3 +1,3 @@
-## Tag Library of the Carver Kirby 3 Plugin
+## Deprecated: Built in tags have been moved inside the plugin
 
 Plugin available here https://github.com/HashandSalt/carver
